@@ -1,4 +1,8 @@
 const { createServiceApp } = require('../../createApp');
+const createLambdaHandler = require('../../createLambdaHandler');
 const router = require('../../routes/news');
 
-module.exports = createServiceApp('/api/news', router);
+const app = createServiceApp('/api/news', router);
+
+module.exports = app;
+module.exports.handler = createLambdaHandler(app);
