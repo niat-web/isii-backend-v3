@@ -5,31 +5,31 @@
     "AuthLogGroup": {
       "Type": "AWS::Logs::LogGroup",
       "Properties": {
-        "LogGroupName": "/aws/lambda/isii-backend-beta-auth"
+        "LogGroupName": "/aws/lambda/isii-backend-staging-auth"
       }
     },
     "ArticlesLogGroup": {
       "Type": "AWS::Logs::LogGroup",
       "Properties": {
-        "LogGroupName": "/aws/lambda/isii-backend-beta-articles"
+        "LogGroupName": "/aws/lambda/isii-backend-staging-articles"
       }
     },
     "NewsLogGroup": {
       "Type": "AWS::Logs::LogGroup",
       "Properties": {
-        "LogGroupName": "/aws/lambda/isii-backend-beta-news"
+        "LogGroupName": "/aws/lambda/isii-backend-staging-news"
       }
     },
     "ReportsLogGroup": {
       "Type": "AWS::Logs::LogGroup",
       "Properties": {
-        "LogGroupName": "/aws/lambda/isii-backend-beta-reports"
+        "LogGroupName": "/aws/lambda/isii-backend-staging-reports"
       }
     },
     "UploadLogGroup": {
       "Type": "AWS::Logs::LogGroup",
       "Properties": {
-        "LogGroupName": "/aws/lambda/isii-backend-beta-upload"
+        "LogGroupName": "/aws/lambda/isii-backend-staging-upload"
       }
     },
     "IamRoleLambdaExecution": {
@@ -58,7 +58,7 @@
                 "-",
                 [
                   "isii-backend",
-                  "beta",
+                  "staging",
                   "lambda"
                 ]
               ]
@@ -75,7 +75,7 @@
                   ],
                   "Resource": [
                     {
-                      "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/isii-backend-beta*:*"
+                      "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/isii-backend-staging*:*"
                     }
                   ]
                 },
@@ -86,7 +86,7 @@
                   ],
                   "Resource": [
                     {
-                      "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/isii-backend-beta*:*:*"
+                      "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/isii-backend-staging*:*:*"
                     }
                   ]
                 },
@@ -115,7 +115,7 @@
             "-",
             [
               "isii-backend",
-              "beta",
+              "staging",
               {
                 "Ref": "AWS::Region"
               },
@@ -129,12 +129,12 @@
       "Type": "AWS::Lambda::Function",
       "Properties": {
         "Code": {
-          "S3Bucket": "serverless-framework-deployments-ap-south-1-6c5da6eb-a86f",
-          "S3Key": "serverless/isii-backend/beta/1776253503848-2026-04-15T11:45:03.848Z/auth.zip"
+          "S3Bucket": "serverless-framework-deployments-ap-south-1-92ebd750-3686",
+          "S3Key": "serverless/isii-backend/staging/1776435860918-2026-04-17T14:24:20.918Z/auth.zip"
         },
         "Handler": "api/auth/index.handler",
         "Runtime": "nodejs20.x",
-        "FunctionName": "isii-backend-beta-auth",
+        "FunctionName": "isii-backend-staging-auth",
         "MemorySize": 512,
         "Timeout": 10,
         "Architectures": [
@@ -142,6 +142,7 @@
         ],
         "Environment": {
           "Variables": {
+            "APP_STAGE": "staging",
             "NODE_ENV": "production",
             "MONGODB_URI": "mongodb+srv://sripavantejb_db_user:isii@cluster0.93ufs41.mongodb.net/?appName=Cluster0",
             "JWT_SECRET": "isii-cms-secret-key-2025-change-in-production",
@@ -164,12 +165,12 @@
       "Type": "AWS::Lambda::Function",
       "Properties": {
         "Code": {
-          "S3Bucket": "serverless-framework-deployments-ap-south-1-6c5da6eb-a86f",
-          "S3Key": "serverless/isii-backend/beta/1776253503848-2026-04-15T11:45:03.848Z/articles.zip"
+          "S3Bucket": "serverless-framework-deployments-ap-south-1-92ebd750-3686",
+          "S3Key": "serverless/isii-backend/staging/1776435860918-2026-04-17T14:24:20.918Z/articles.zip"
         },
         "Handler": "api/articles/index.handler",
         "Runtime": "nodejs20.x",
-        "FunctionName": "isii-backend-beta-articles",
+        "FunctionName": "isii-backend-staging-articles",
         "MemorySize": 512,
         "Timeout": 15,
         "Architectures": [
@@ -177,6 +178,7 @@
         ],
         "Environment": {
           "Variables": {
+            "APP_STAGE": "staging",
             "NODE_ENV": "production",
             "MONGODB_URI": "mongodb+srv://sripavantejb_db_user:isii@cluster0.93ufs41.mongodb.net/?appName=Cluster0",
             "JWT_SECRET": "isii-cms-secret-key-2025-change-in-production",
@@ -199,12 +201,12 @@
       "Type": "AWS::Lambda::Function",
       "Properties": {
         "Code": {
-          "S3Bucket": "serverless-framework-deployments-ap-south-1-6c5da6eb-a86f",
-          "S3Key": "serverless/isii-backend/beta/1776253503848-2026-04-15T11:45:03.848Z/news.zip"
+          "S3Bucket": "serverless-framework-deployments-ap-south-1-92ebd750-3686",
+          "S3Key": "serverless/isii-backend/staging/1776435860918-2026-04-17T14:24:20.918Z/news.zip"
         },
         "Handler": "api/news/index.handler",
         "Runtime": "nodejs20.x",
-        "FunctionName": "isii-backend-beta-news",
+        "FunctionName": "isii-backend-staging-news",
         "MemorySize": 512,
         "Timeout": 15,
         "Architectures": [
@@ -212,6 +214,7 @@
         ],
         "Environment": {
           "Variables": {
+            "APP_STAGE": "staging",
             "NODE_ENV": "production",
             "MONGODB_URI": "mongodb+srv://sripavantejb_db_user:isii@cluster0.93ufs41.mongodb.net/?appName=Cluster0",
             "JWT_SECRET": "isii-cms-secret-key-2025-change-in-production",
@@ -234,12 +237,12 @@
       "Type": "AWS::Lambda::Function",
       "Properties": {
         "Code": {
-          "S3Bucket": "serverless-framework-deployments-ap-south-1-6c5da6eb-a86f",
-          "S3Key": "serverless/isii-backend/beta/1776253503848-2026-04-15T11:45:03.848Z/reports.zip"
+          "S3Bucket": "serverless-framework-deployments-ap-south-1-92ebd750-3686",
+          "S3Key": "serverless/isii-backend/staging/1776435860918-2026-04-17T14:24:20.918Z/reports.zip"
         },
         "Handler": "api/reports/index.handler",
         "Runtime": "nodejs20.x",
-        "FunctionName": "isii-backend-beta-reports",
+        "FunctionName": "isii-backend-staging-reports",
         "MemorySize": 512,
         "Timeout": 15,
         "Architectures": [
@@ -247,6 +250,7 @@
         ],
         "Environment": {
           "Variables": {
+            "APP_STAGE": "staging",
             "NODE_ENV": "production",
             "MONGODB_URI": "mongodb+srv://sripavantejb_db_user:isii@cluster0.93ufs41.mongodb.net/?appName=Cluster0",
             "JWT_SECRET": "isii-cms-secret-key-2025-change-in-production",
@@ -269,12 +273,12 @@
       "Type": "AWS::Lambda::Function",
       "Properties": {
         "Code": {
-          "S3Bucket": "serverless-framework-deployments-ap-south-1-6c5da6eb-a86f",
-          "S3Key": "serverless/isii-backend/beta/1776253503848-2026-04-15T11:45:03.848Z/upload.zip"
+          "S3Bucket": "serverless-framework-deployments-ap-south-1-92ebd750-3686",
+          "S3Key": "serverless/isii-backend/staging/1776435860918-2026-04-17T14:24:20.918Z/upload.zip"
         },
         "Handler": "api/upload/index.handler",
         "Runtime": "nodejs20.x",
-        "FunctionName": "isii-backend-beta-upload",
+        "FunctionName": "isii-backend-staging-upload",
         "MemorySize": 1024,
         "Timeout": 30,
         "Architectures": [
@@ -282,6 +286,7 @@
         ],
         "Environment": {
           "Variables": {
+            "APP_STAGE": "staging",
             "NODE_ENV": "production",
             "MONGODB_URI": "mongodb+srv://sripavantejb_db_user:isii@cluster0.93ufs41.mongodb.net/?appName=Cluster0",
             "JWT_SECRET": "isii-cms-secret-key-2025-change-in-production",
@@ -300,60 +305,60 @@
         "UploadLogGroup"
       ]
     },
-    "AuthLambdaVersionTeOGuCAvOU7mE0cluuMe6zaeCyC9SXbirdWxIhhY8Y": {
-      "Type": "AWS::Lambda::Version",
-      "DeletionPolicy": "Retain",
-      "Properties": {
-        "FunctionName": {
-          "Ref": "AuthLambdaFunction"
-        },
-        "CodeSha256": "idKCWOYL4mOUkV+aAVWoXHYCzHiWlbJAfZDwwloUn0w="
-      }
-    },
-    "ReportsLambdaVersionuuoz0TSBjVtRbszxSSk8vfq7WJLjzamXHoQ7hm737E": {
-      "Type": "AWS::Lambda::Version",
-      "DeletionPolicy": "Retain",
-      "Properties": {
-        "FunctionName": {
-          "Ref": "ReportsLambdaFunction"
-        },
-        "CodeSha256": "idKCWOYL4mOUkV+aAVWoXHYCzHiWlbJAfZDwwloUn0w="
-      }
-    },
-    "ArticlesLambdaVersionOSI63KLTYbH9gvZb3fU7KdFBmPUQHx7ie7YaTUI": {
+    "ArticlesLambdaVersionh5vFBNnwpM6DdHdYXpzWtUVpLtM1XAq9nZ2vyRU": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "ArticlesLambdaFunction"
         },
-        "CodeSha256": "idKCWOYL4mOUkV+aAVWoXHYCzHiWlbJAfZDwwloUn0w="
+        "CodeSha256": "vg8bUk7l42WYQ7b1gbGD/TPM6mUa04tiQud8hTt9Ht8="
       }
     },
-    "UploadLambdaVersionz0TKad8fBBG36WifwfR3gIAqjQCJ07Hy5lQmGQjFLI": {
+    "AuthLambdaVersionls1bC7oBvD5VOAvrpTKF1MHarEmPc3njodqA4": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
-          "Ref": "UploadLambdaFunction"
+          "Ref": "AuthLambdaFunction"
         },
-        "CodeSha256": "idKCWOYL4mOUkV+aAVWoXHYCzHiWlbJAfZDwwloUn0w="
+        "CodeSha256": "vg8bUk7l42WYQ7b1gbGD/TPM6mUa04tiQud8hTt9Ht8="
       }
     },
-    "NewsLambdaVersionowfV6vHlZpi40fvzSi1jrODWw03nTK7R6fJOOH4K4w": {
+    "NewsLambdaVersionlvhmy0vFfqbGKWvxpAV8ejqCM9qnzvmKu6dfPxzJOw": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "NewsLambdaFunction"
         },
-        "CodeSha256": "idKCWOYL4mOUkV+aAVWoXHYCzHiWlbJAfZDwwloUn0w="
+        "CodeSha256": "vg8bUk7l42WYQ7b1gbGD/TPM6mUa04tiQud8hTt9Ht8="
+      }
+    },
+    "UploadLambdaVersioni88xZsJIclQHDSG8zuS1TPRd200uiM2fSevTxg": {
+      "Type": "AWS::Lambda::Version",
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "FunctionName": {
+          "Ref": "UploadLambdaFunction"
+        },
+        "CodeSha256": "vg8bUk7l42WYQ7b1gbGD/TPM6mUa04tiQud8hTt9Ht8="
+      }
+    },
+    "ReportsLambdaVersionDWl6HFh5XhTGg4vwFyI8QHvSnqPf5M34rr03c3NQco": {
+      "Type": "AWS::Lambda::Version",
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "FunctionName": {
+          "Ref": "ReportsLambdaFunction"
+        },
+        "CodeSha256": "vg8bUk7l42WYQ7b1gbGD/TPM6mUa04tiQud8hTt9Ht8="
       }
     },
     "HttpApi": {
       "Type": "AWS::ApiGatewayV2::Api",
       "Properties": {
-        "Name": "beta-isii-backend",
+        "Name": "staging-isii-backend",
         "ProtocolType": "HTTP"
       }
     },
@@ -853,54 +858,54 @@
   },
   "Outputs": {
     "ServerlessDeploymentBucketName": {
-      "Value": "serverless-framework-deployments-ap-south-1-6c5da6eb-a86f",
+      "Value": "serverless-framework-deployments-ap-south-1-92ebd750-3686",
       "Export": {
-        "Name": "sls-isii-backend-beta-ServerlessDeploymentBucketName"
-      }
-    },
-    "AuthLambdaFunctionQualifiedArn": {
-      "Description": "Current Lambda function version",
-      "Value": {
-        "Ref": "AuthLambdaVersionTeOGuCAvOU7mE0cluuMe6zaeCyC9SXbirdWxIhhY8Y"
-      },
-      "Export": {
-        "Name": "sls-isii-backend-beta-AuthLambdaFunctionQualifiedArn"
-      }
-    },
-    "ReportsLambdaFunctionQualifiedArn": {
-      "Description": "Current Lambda function version",
-      "Value": {
-        "Ref": "ReportsLambdaVersionuuoz0TSBjVtRbszxSSk8vfq7WJLjzamXHoQ7hm737E"
-      },
-      "Export": {
-        "Name": "sls-isii-backend-beta-ReportsLambdaFunctionQualifiedArn"
+        "Name": "sls-isii-backend-staging-ServerlessDeploymentBucketName"
       }
     },
     "ArticlesLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "ArticlesLambdaVersionOSI63KLTYbH9gvZb3fU7KdFBmPUQHx7ie7YaTUI"
+        "Ref": "ArticlesLambdaVersionh5vFBNnwpM6DdHdYXpzWtUVpLtM1XAq9nZ2vyRU"
       },
       "Export": {
-        "Name": "sls-isii-backend-beta-ArticlesLambdaFunctionQualifiedArn"
+        "Name": "sls-isii-backend-staging-ArticlesLambdaFunctionQualifiedArn"
       }
     },
-    "UploadLambdaFunctionQualifiedArn": {
+    "AuthLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "UploadLambdaVersionz0TKad8fBBG36WifwfR3gIAqjQCJ07Hy5lQmGQjFLI"
+        "Ref": "AuthLambdaVersionls1bC7oBvD5VOAvrpTKF1MHarEmPc3njodqA4"
       },
       "Export": {
-        "Name": "sls-isii-backend-beta-UploadLambdaFunctionQualifiedArn"
+        "Name": "sls-isii-backend-staging-AuthLambdaFunctionQualifiedArn"
       }
     },
     "NewsLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "NewsLambdaVersionowfV6vHlZpi40fvzSi1jrODWw03nTK7R6fJOOH4K4w"
+        "Ref": "NewsLambdaVersionlvhmy0vFfqbGKWvxpAV8ejqCM9qnzvmKu6dfPxzJOw"
       },
       "Export": {
-        "Name": "sls-isii-backend-beta-NewsLambdaFunctionQualifiedArn"
+        "Name": "sls-isii-backend-staging-NewsLambdaFunctionQualifiedArn"
+      }
+    },
+    "UploadLambdaFunctionQualifiedArn": {
+      "Description": "Current Lambda function version",
+      "Value": {
+        "Ref": "UploadLambdaVersioni88xZsJIclQHDSG8zuS1TPRd200uiM2fSevTxg"
+      },
+      "Export": {
+        "Name": "sls-isii-backend-staging-UploadLambdaFunctionQualifiedArn"
+      }
+    },
+    "ReportsLambdaFunctionQualifiedArn": {
+      "Description": "Current Lambda function version",
+      "Value": {
+        "Ref": "ReportsLambdaVersionDWl6HFh5XhTGg4vwFyI8QHvSnqPf5M34rr03c3NQco"
+      },
+      "Export": {
+        "Name": "sls-isii-backend-staging-ReportsLambdaFunctionQualifiedArn"
       }
     },
     "HttpApiId": {
@@ -909,7 +914,7 @@
         "Ref": "HttpApi"
       },
       "Export": {
-        "Name": "sls-isii-backend-beta-HttpApiId"
+        "Name": "sls-isii-backend-staging-HttpApiId"
       }
     },
     "HttpApiUrl": {
@@ -934,7 +939,7 @@
         ]
       },
       "Export": {
-        "Name": "sls-isii-backend-beta-HttpApiUrl"
+        "Name": "sls-isii-backend-staging-HttpApiUrl"
       }
     }
   }

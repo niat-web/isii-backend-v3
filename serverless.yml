@@ -2,13 +2,17 @@ service: isii-backend
 
 frameworkVersion: '^4.0.0'
 
+custom:
+  stage: ${sls:stage}
+
 provider:
   name: aws
   runtime: nodejs20.x
-  stage: ${opt:stage, 'beta'}
+  stage: ${opt:stage, 'staging'}
   region: ${opt:region, 'ap-south-1'}
   architecture: x86_64
   environment:
+    APP_STAGE: ${self:custom.stage}
     NODE_ENV: production
     MONGODB_URI: ${env:MONGODB_URI}
     JWT_SECRET: ${env:JWT_SECRET}
@@ -22,12 +26,12 @@ provider:
             - s3:PutObject
             - s3:GetObject
           Resource:
-            - arn:aws:s3:::${env:AWS_S3_BUCKET}/*
+            - arn:aws:s3:::${self:provider.environment.AWS_S3_BUCKET}/*
         - Effect: Allow
           Action:
             - s3:ListBucket
           Resource:
-            - arn:aws:s3:::${env:AWS_S3_BUCKET}
+            - arn:aws:s3:::${self:provider.environment.AWS_S3_BUCKET}
 
 package:
   individually: true
