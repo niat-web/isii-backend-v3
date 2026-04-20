@@ -6,3 +6,5 @@ const app = createServiceApp('/api/news', router);
 
 module.exports = app;
 module.exports.handler = createLambdaHandler(app);
+
+// sample
