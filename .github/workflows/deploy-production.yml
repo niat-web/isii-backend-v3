@@ -21,6 +21,7 @@ jobs:
       JWT_SECRET: ${{ secrets.JWT_SECRET }}
       AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
       PUBLIC_FILES_BASE_URL: ${{ secrets.PUBLIC_FILES_BASE_URL }}
+      SERVERLESS_ACCESS_KEY: ${{ secrets.SERVERLESS_ACCESS_KEY }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
