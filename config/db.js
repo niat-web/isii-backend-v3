@@ -33,6 +33,7 @@ const connectDB = async () => {
     };
 
     // Cache the connection promise
+    console.log(process.env.MONGODB_URI)
     cachedConnection = mongoose.connect(process.env.MONGODB_URI, options).then((conn) => {
       console.log(`MongoDB Connected: ${conn.connection.host}`);
       cachedConnection = null; // Clear cache on success
