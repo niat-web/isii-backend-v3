@@ -22,6 +22,7 @@ const path = require('path');
 const { HeadObjectCommand } = require('@aws-sdk/client-s3');
 const { protect } = require('../middleware/auth');
 const {
+  applyStageUploadPrefix,
   buildScopedUploadKey,
   extractSlugFromKey,
   getSafeExtension,
@@ -132,19 +133,27 @@ const findAvailableScopedKey = async (folder, originalName) => {
 };
 
 const buildUploadKeyForRequest = async (req, file) => {
+  const appStage = process.env.APP_STAGE;
+
   if (file.mimetype.startsWith('image/')) {
     const extension = getSafeExtension(file.originalname);
-    return `images/${Date.now()}-${generateUUID()}${extension}`;
+    return applyStageUploadPrefix(
+      `images/${Date.now()}-${generateUUID()}${extension}`,
+      appStage
+    );
   }
 
-  const scopedFolder = getUploadScopeFolder(getRequestedUploadScope(req));
+  const scopedFolder = applyStageUploadPrefix(
+    getUploadScopeFolder(getRequestedUploadScope(req)),
+    appStage
+  );
 
   if (scopedFolder) {
     return findAvailableScopedKey(scopedFolder, file.originalname);
   }
 
   if (file.mimetype === 'application/pdf') {
-    return buildReadableKey('pdfs/', file.originalname);
+    return buildReadableKey(applyStageUploadPrefix('pdfs/', appStage), file.originalname);
   }
 
   const error = new Error(

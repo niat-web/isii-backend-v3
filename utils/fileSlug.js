@@ -36,6 +36,24 @@ const normalizeUploadScope = (value = '') => {
 const getUploadScopeFolder = (value = '') =>
   UPLOAD_SCOPE_FOLDERS[normalizeUploadScope(value)] || '';
 
+const normalizeAppStage = (value = '') => String(value).trim().toLowerCase();
+
+const getStageUploadPrefix = (appStage = '') =>
+  normalizeAppStage(appStage) === 'staging' ? 'staging/' : '';
+
+const applyStageUploadPrefix = (value = '', appStage = '') => {
+  const normalizedValue = String(value).replace(/^\/+/, '');
+  const prefix = getStageUploadPrefix(appStage);
+
+  if (!prefix || !normalizedValue) {
+    return normalizedValue;
+  }
+
+  return normalizedValue.startsWith(prefix)
+    ? normalizedValue
+    : `${prefix}${normalizedValue}`;
+};
+
 const buildScopedUploadKey = (folder, originalName, versionNumber = null) => {
   const baseName = sanitizeUploadedBaseName(originalName);
   const extension = getSafeExtension(originalName);
@@ -63,10 +81,13 @@ const extractSlugFromKey = (value = '') =>
 
 module.exports = {
   buildScopedUploadKey,
+  applyStageUploadPrefix,
   extractSlugFromKey,
   extractSlugFromUrl,
   getSafeExtension,
+  getStageUploadPrefix,
   getUploadScopeFolder,
+  normalizeAppStage,
   normalizeUploadScope,
   sanitizeUploadedBaseName,
 };
